@@ -18,3 +18,20 @@ function rename_to_typescript() {
     git mv -- "$f" "${f%.js}.ts"
     done
 }
+
+function django() {
+    source ../../bin/activate;
+    export PYTHONPATH=$VIRTUAL_ENV:~/Sites/libraries/server-scripts;
+    export SITE_NAME=${PWD##*/};
+}
+
+ds () {
+    if [ -z "$1" ]; then
+        settings="env";
+    else
+        settings="$1.env";
+    fi;
+    export WERKZEUG_DEBUG_PIN="off";
+    DEBUG_PORT=`echo "from settings.$settings import DEBUG_PORT; print DEBUG_PORT;" | python`;
+    PYTHONPATH="$PWD" DJANGO_SETTINGS_MODULE=settings.$settings django-admin.py runserver_plus "0.0.0.0:$DEBUG_PORT"
+}
