@@ -18,7 +18,7 @@ Bundle 'plasticboy/vim-markdown'
 Bundle 'tpope/vim-fugitive'
 Bundle "pangloss/vim-javascript"
 Bundle "leafgarland/typescript-vim"
-Plugin 'itchyny/lightline.vim'
+" Plugin 'itchyny/lightline.vim'
 
 call vundle#end()            " required
 filetype plugin indent on    " required
