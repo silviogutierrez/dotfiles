@@ -1,0 +1,6 @@
+[style]
+based_on_style = pep8
+column_limit = 120
+dedent_closing_brackets = true
+join_multiple_lines = false
+space_between_ending_comma_and_closing_bracket = false
