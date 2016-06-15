@@ -35,3 +35,9 @@ ds () {
     DEBUG_PORT=`echo "from settings.$settings import DEBUG_PORT; print DEBUG_PORT;" | python`;
     PYTHONPATH="$PWD" DJANGO_SETTINGS_MODULE=settings.$settings django-admin.py runserver_plus "0.0.0.0:$DEBUG_PORT"
 }
+
+resetdb() {
+  psql postgres -c 'SELECT pg_terminate_backend(pid) FROM pg_stat_activity WHERE pid <> pg_backend_pid()';
+  psql postgres -c "DROP DATABASE IF EXISTS \"$1\"";
+  psql postgres -c "CREATE DATABASE \"$1\"";
+}
