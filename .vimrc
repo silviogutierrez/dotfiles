@@ -171,3 +171,21 @@ set colorcolumn=81,82
 if filereadable(glob("$SITE_NAME/.vimrc"))
   source $PWD/$SITE_NAME/.vimrc
 endif
+
+function! Meow()
+    let method = getline(search("\\sdef\\s", "bn"))
+    let method = substitute(method, "^\\s\\+def\\s\\+", "", "g")
+    let method = substitute(method, "(.\\+$", "", "g")
+
+    let class = getline(search("^\\S", "bn"))
+    let class = substitute(class, "^class\\s\\+", "", "g")
+    let class = substitute(class, "(.\\+$", "", "g")
+
+    " Current directory, then last element is the file.
+    let file = split(expand('%:h'), "/")[-1]
+    let command = "!../../bin/python manage.py test apps." . file . ".tests." . class . "." . method .  " --settings=settings.tests --failfast --keepdb"
+    echom command
+    execute command
+endfunction
+
+map <leader>` :call Meow()<CR>
