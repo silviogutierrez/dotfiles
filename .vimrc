@@ -183,7 +183,7 @@ function! Meow()
 
     " Current directory, then last element is the file.
     let file = split(expand('%:h'), "/")[-1]
-    let command = "!../../bin/python manage.py test apps." . file . ".tests." . class . "." . method .  " --settings=settings.tests --failfast --keepdb"
+    let command = "!../../bin/python server/manage.py test apps." . file . ".tests." . class . "." . method .  " --failfast --keepdb"
     echom command
     execute command
 endfunction
