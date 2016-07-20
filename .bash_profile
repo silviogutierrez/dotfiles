@@ -32,7 +32,7 @@ ds () {
         settings="$1.env";
     fi;
     export WERKZEUG_DEBUG_PIN="off";
-    DEBUG_PORT=`echo "from settings.$settings import DEBUG_PORT; print DEBUG_PORT;" | python`;
+    DEBUG_PORT=`echo "from settings.$settings import DEBUG_PORT; print(DEBUG_PORT);" | python`;
     PYTHONPATH="$PWD" DJANGO_SETTINGS_MODULE=settings.$settings django-admin.py runserver_plus "0.0.0.0:$DEBUG_PORT"
 }
 
