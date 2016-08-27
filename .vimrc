@@ -50,6 +50,8 @@ let g:syntastic_html_checkers=['']
 let g:syntastic_typescript_tsc_fname = ''
 let g:syntastic_typescript_checkers = ['tsc', 'tslint']
 
+let g:syntastic_python_python_exec = 'python3.5'
+
 function! JscsFix()
     "Save current cursor position"
     let l:winview = winsaveview()
