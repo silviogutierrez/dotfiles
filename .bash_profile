@@ -21,7 +21,7 @@ function rename_to_typescript() {
 
 function django() {
     source ../../bin/activate;
-    export PYTHONPATH=$VIRTUAL_ENV:~/Sites/libraries/server-scripts;
+    export PYTHONPATH=$PWD:$VIRTUAL_ENV:~/Sites/libraries/server-scripts;
     export SITE_NAME=${PWD##*/};
 }
 
