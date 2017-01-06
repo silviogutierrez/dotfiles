@@ -36,8 +36,22 @@ ds () {
     PYTHONPATH="$PWD" DJANGO_SETTINGS_MODULE=settings.$settings django-admin.py runserver_plus "0.0.0.0:$DEBUG_PORT"
 }
 
+reset_migrations() {
+    rm -rf apps/$1/migrations;
+    mkdir -p apps/$1/migrations;
+    touch apps/$1/migrations/__init__.py;
+}
+
 resetdb() {
   psql postgres -c 'SELECT pg_terminate_backend(pid) FROM pg_stat_activity WHERE pid <> pg_backend_pid()';
   psql postgres -c "DROP DATABASE IF EXISTS \"$1\"";
   psql postgres -c "CREATE DATABASE \"$1\"";
+}
+
+savedb() {
+    pg_dump $1 > ~/backup.sql;
+}
+
+restoredb() {
+    psql $1 < ~/backup.sql;
 }

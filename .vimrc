@@ -24,16 +24,17 @@ call vundle#end()            " required
 filetype plugin indent on    " required
 
 autocmd BufNewFile,BufRead *.ts,*.tsx setlocal filetype=typescript
-autocmd BufNewFile,BufRead *.md, setlocal spell
+autocmd BufNewFile,BufRead *.md,*.ts,*.tsx,*.py, setlocal spell
 set spellfile=~/Sites/libraries/dotfiles/en.utf-8.add
 
 let g:vim_markdown_folding_disabled=1
 
+let g:syntastic_python_python_exec = 'python3.5'
 let g:pymode_folding = 0
 let g:pymode_lint = 0
 let g:pymode_lint_write = 0
 let g:pymode_lint_checker = ""
-let g:pymode_lint_ignore = "C0301,R0921,R0201,E501,C901"
+" let g:pymode_lint_ignore = "C0301,R0921,R0201,E501,C901"
 let g:pymode_rope = 0
 
 set statusline+=%#warningmsg#
