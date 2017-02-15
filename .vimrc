@@ -1,3 +1,4 @@
+set shell=/bin/bash
 set clipboard=unnamed
 set nocompatible
 filetype off
@@ -5,8 +6,9 @@ filetype off
 set rtp+=~/.vim/bundle/Vundle.vim
 call vundle#begin()
 
-Bundle 'scrooloose/syntastic'
-Bundle 'gmarik/vundle'
+Plugin 'Shougo/vimproc'
+Plugin 'VundleVim/Vundle.vim'
+Plugin 'scrooloose/syntastic'
 Bundle 'wgibbs/vim-irblack'
 Bundle 'chriskempson/vim-tomorrow-theme'
 Bundle 'tpope/vim-surround'
@@ -16,14 +18,15 @@ Bundle 'groenewege/vim-less'
 Bundle 'klen/python-mode'
 Bundle 'plasticboy/vim-markdown'
 Bundle 'tpope/vim-fugitive'
-Bundle "pangloss/vim-javascript"
-Bundle "leafgarland/typescript-vim"
+Bundle 'pangloss/vim-javascript'
+Bundle 'leafgarland/typescript-vim'
+Bundle 'Quramy/tsuquyomi'
 " Plugin 'itchyny/lightline.vim'
 
 call vundle#end()            " required
 filetype plugin indent on    " required
 
-autocmd BufNewFile,BufRead *.ts,*.tsx setlocal filetype=typescript
+" autocmd BufNewFile,BufRead *.ts,*.tsx setlocal filetype=typescript
 autocmd BufNewFile,BufRead *.md,*.ts,*.tsx,*.py, setlocal spell
 set spellfile=~/Sites/libraries/dotfiles/en.utf-8.add
 
@@ -48,8 +51,11 @@ let g:syntastic_check_on_wq = 0
 let g:syntastic_javascript_checkers=['jscs']
 let g:syntastic_html_checkers=['']
 
-let g:syntastic_typescript_tsc_fname = ''
-let g:syntastic_typescript_checkers = ['tsc', 'tslint']
+let g:tsuquyomi_disable_quickfix = 1
+let g:syntastic_typescript_checkers = ['tsuquyomi']
+
+" let g:syntastic_typescript_tsc_fname = ''
+" let g:syntastic_typescript_checkers = ['tsc', 'tslint']
 
 let g:syntastic_python_python_exec = 'python3.5'
 
@@ -83,7 +89,6 @@ set shiftwidth=4
 set smarttab
 set expandtab
 
-set shell=bash\ -l
 syntax on
 set number
 set autoread
@@ -171,9 +176,10 @@ hi TabLineSel ctermfg=blue
 set colorcolumn=81,82
 
 " TODO: does this still work?
-if filereadable(glob("$SITE_NAME/.vimrc"))
-  source $PWD/$SITE_NAME/.vimrc
-endif
+" ANSWER: not in vim 8.
+" if filereadable(glob("$SITE_NAME/.vimrc"))
+"   source $PWD/$SITE_NAME/.vimrc
+" endif
 
 function! Meow()
     let method = getline(search("\\sdef\\s", "bn"))
