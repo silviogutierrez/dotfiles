@@ -55,3 +55,14 @@ savedb() {
 restoredb() {
     psql $1 < ~/backup.sql;
 }
+
+setup_environment() {
+    mkdir -p ~/Sites/$1;
+    virtualenv -p python3.5 --clear ~/Sites/$1;
+    mkdir -p ~/Sites/$1/backups;
+    mkdir -p ~/Sites/$1/src;
+    cd ~/Sites/$1/src;
+    cd $1;
+    ../../bin/pip install -r server/requirements/local.txt;
+    npm install;
+}

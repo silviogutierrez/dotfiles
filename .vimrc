@@ -21,6 +21,7 @@ Bundle 'tpope/vim-fugitive'
 Bundle 'pangloss/vim-javascript'
 Bundle 'leafgarland/typescript-vim'
 Bundle 'Quramy/tsuquyomi'
+" Plugin 'Quramy/vim-js-pretty-template'
 " Plugin 'itchyny/lightline.vim'
 
 call vundle#end()            " required
@@ -52,6 +53,10 @@ let g:syntastic_javascript_checkers=['jscs']
 let g:syntastic_html_checkers=['']
 
 let g:tsuquyomi_disable_quickfix = 1
+let g:tsuquyomi_completion_detail = 1
+
+autocmd FileType typescript nmap <buffer> <Leader>d : <C-u>echo tsuquyomi#hint()<CR>
+
 let g:syntastic_typescript_checkers = ['tsuquyomi']
 
 " let g:syntastic_typescript_tsc_fname = ''
