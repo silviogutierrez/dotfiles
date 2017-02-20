@@ -62,6 +62,7 @@ setup_environment() {
     mkdir -p ~/Sites/$1/backups;
     mkdir -p ~/Sites/$1/src;
     cd ~/Sites/$1/src;
+    git clone $2 $1;
     cd $1;
     ../../bin/pip install -r server/requirements/local.txt;
     npm install;

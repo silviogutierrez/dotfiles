@@ -57,7 +57,7 @@ let g:tsuquyomi_completion_detail = 1
 
 autocmd FileType typescript nmap <buffer> <Leader>d : <C-u>echo tsuquyomi#hint()<CR>
 
-let g:syntastic_typescript_checkers = ['tsuquyomi']
+let g:syntastic_typescript_checkers = ['tslint', 'tsuquyomi']
 
 " let g:syntastic_typescript_tsc_fname = ''
 " let g:syntastic_typescript_checkers = ['tsc', 'tslint']
