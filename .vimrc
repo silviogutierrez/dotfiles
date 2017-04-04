@@ -7,6 +7,7 @@ set rtp+=~/.vim/bundle/Vundle.vim
 call vundle#begin()
 
 Plugin 'Shougo/vimproc'
+" Plugin 'neomake/neomake'
 Plugin 'VundleVim/Vundle.vim'
 Plugin 'scrooloose/syntastic'
 Bundle 'wgibbs/vim-irblack'
@@ -15,7 +16,7 @@ Bundle 'tpope/vim-surround'
 Bundle 'wincent/Command-T'
 Bundle 'ZenCoding.vim'
 Bundle 'groenewege/vim-less'
-Bundle 'klen/python-mode'
+" Bundle 'klen/python-mode'
 Bundle 'plasticboy/vim-markdown'
 Bundle 'tpope/vim-fugitive'
 Bundle 'pangloss/vim-javascript'
@@ -26,6 +27,10 @@ Bundle 'Quramy/tsuquyomi'
 
 call vundle#end()            " required
 filetype plugin indent on    " required
+
+" For when Neomake is enabled.
+" autocmd! BufWritePost * Neomake
+" let g:neomake_open_list = 2
 
 " autocmd BufNewFile,BufRead *.ts,*.tsx setlocal filetype=typescript
 autocmd BufNewFile,BufRead *.md,*.ts,*.tsx,*.py, setlocal spell
@@ -41,15 +46,16 @@ let g:pymode_lint_checker = ""
 " let g:pymode_lint_ignore = "C0301,R0921,R0201,E501,C901"
 let g:pymode_rope = 0
 
-set statusline+=%#warningmsg#
-set statusline+=%{SyntasticStatuslineFlag()}
-set statusline+=%*
+" set statusline+=%#warningmsg#
+" set statusline+=%{SyntasticStatuslineFlag()}
+" set statusline+=%*
 
 let g:syntastic_always_populate_loc_list = 1
 let g:syntastic_auto_loc_list = 1
 let g:syntastic_check_on_open = 0
 let g:syntastic_check_on_wq = 0
 let g:syntastic_javascript_checkers=['jscs']
+" let g:syntastic_python_checkers=['']
 let g:syntastic_html_checkers=['']
 
 let g:tsuquyomi_disable_quickfix = 1
@@ -57,7 +63,7 @@ let g:tsuquyomi_completion_detail = 1
 
 autocmd FileType typescript nmap <buffer> <Leader>d : <C-u>echo tsuquyomi#hint()<CR>
 
-let g:syntastic_typescript_checkers = ['tslint', 'tsuquyomi']
+let g:syntastic_typescript_checkers = ['tsuquyomi', 'tslint']
 
 " let g:syntastic_typescript_tsc_fname = ''
 " let g:syntastic_typescript_checkers = ['tsc', 'tslint']

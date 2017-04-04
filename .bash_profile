@@ -2,9 +2,41 @@
 # See: http://apple.stackexchange.com/questions/24310/emacs-ctrl-x-ctrl-s-command-not-working-in-terminal-app
 stty -ixon -ixoff
 
+export JAVA_HOME="/Library/Internet Plug-Ins/JavaAppletPlugin.plugin/Contents/Home"
 shopt -s expand_aliases
 export PATH=~/Sites/libraries/scripts/scripts:$(brew --prefix coreutils)/libexec/gnubin:/usr/local/bin:/usr/local/sbin:$PATH
-PS1="\[\033[00m\]\u\[\033[0;33m\]@\[\033[00m\]\h\[\033[0;33m\] \w\[\033[00m\]: "
+# PS1="\[\033[00m\]\u\[\033[0;33m\]@\[\033[00m\]\h\[\033[0;33m\] \w\[\033[00m\]: "
+
+
+export VIRTUAL_ENV_DISABLE_PROMPT=1
+function super_cwd() {
+    cwd_with_tilde=`dirs -0`
+    # Turn something like ~/Sites/foo.example.com/src/foo.example.com/a/b/c into: foo.example.com/a/b/c
+    pattern=\~\/Sites\/*\/src\/
+
+    without_prefix=${cwd_with_tilde/$pattern/};
+
+    # If no virtual env is activated, behave as normal.
+    if [ -z ${VIRTUAL_ENV+x} ]; then
+        echo $cwd_with_tilde;
+    else
+        # Get just the name of the virtual env, ie, foo.example.com
+        site_name=`basename $VIRTUAL_ENV`;
+
+        # Get the full path, ie, ~/Sites/foo.example.com/src/foo.example.com
+        site_path="$VIRTUAL_ENV/src/$site_name";
+
+        # If we are inside this path, trim it off and show just the virtualenv in parentheses.
+        if [ "${PWD##$site_path}" != "$PWD" ]; then
+            echo "($site_name)${PWD/$site_path/}";
+        else
+            # Else show the normal behavior but also highlight the virtualenv.
+            echo "($site_name) $cwd_with_tilde";
+        fi
+    fi
+}
+
+PS1="\[\033[00m\]\u\[\033[0;33m\]@\[\033[00m\]\h\[\033[0;33m\] \$(super_cwd)\[\033[00m\]: "
 export EDITOR=vim
 export PIP_DEFAULT_TIMEOUT=60
 export PIP_REQUIRE_VIRTUALENV=true
