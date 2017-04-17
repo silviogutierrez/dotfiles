@@ -7,6 +7,7 @@ shopt -s expand_aliases
 export PATH=~/Sites/libraries/scripts/scripts:$(brew --prefix coreutils)/libexec/gnubin:/usr/local/bin:/usr/local/sbin:$PATH
 # PS1="\[\033[00m\]\u\[\033[0;33m\]@\[\033[00m\]\h\[\033[0;33m\] \w\[\033[00m\]: "
 
+alias forcepush='mv .git/hooks/pre-push .git/hooks/disabled-pre-push && git push && mv .git/hooks/disabled-pre-push .git/hooks/pre-push'
 
 export VIRTUAL_ENV_DISABLE_PROMPT=1
 function super_cwd() {
