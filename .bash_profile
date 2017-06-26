@@ -56,7 +56,7 @@ function django() {
     source ../../bin/activate;
     # export PYTHONPATH=$PWD:$VIRTUAL_ENV:~/Sites/libraries/server-scripts;
     # Presumably django admin works below.
-    export PYTHONPATH="$PWD/server:$VIRTUAL_ENV"
+    export PYTHONPATH="$PWD/server:$VIRTUAL_ENV:$HOME/Sites/libraries/server-scripts"
     export DJANGO_SETTINGS_MODULE="settings"
     export SITE_NAME=${PWD##*/};
 }
