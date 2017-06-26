@@ -38,7 +38,7 @@ set spellfile=~/Sites/libraries/dotfiles/en.utf-8.add
 
 let g:vim_markdown_folding_disabled=1
 
-let g:syntastic_python_python_exec = 'python3.5'
+let g:syntastic_python_python_exec = 'python3.6'
 let g:pymode_folding = 0
 let g:pymode_lint = 0
 let g:pymode_lint_write = 0
@@ -55,7 +55,10 @@ let g:syntastic_auto_loc_list = 1
 let g:syntastic_check_on_open = 0
 let g:syntastic_check_on_wq = 0
 let g:syntastic_javascript_checkers=['jscs']
-" let g:syntastic_python_checkers=['']
+
+let g:syntastic_python_checkers=['mypy', 'python', 'flake8', 'pylint']
+let g:syntastic_python_mypy_args = "--ignore-missing-imports --strict --follow-imports silent"
+
 let g:syntastic_html_checkers=['']
 
 let g:tsuquyomi_disable_quickfix = 1
@@ -68,7 +71,7 @@ let g:syntastic_typescript_checkers = ['tsuquyomi', 'tslint']
 " let g:syntastic_typescript_tsc_fname = ''
 " let g:syntastic_typescript_checkers = ['tsc', 'tslint']
 
-let g:syntastic_python_python_exec = 'python3.5'
+" let g:syntastic_python_python_exec = 'python3.5'
 
 function! JscsFix()
     "Save current cursor position"
@@ -102,6 +105,7 @@ set expandtab
 
 syntax on
 set number
+set relativenumber
 set autoread
 set backspace=2
 
