@@ -56,6 +56,7 @@ function django() {
     source ../../bin/activate;
     # export PYTHONPATH=$PWD:$VIRTUAL_ENV:~/Sites/libraries/server-scripts;
     # Presumably django admin works below.
+    export MYPYPATH="$PWD/server/stubs:$PWD/server:$VIRTUAL_ENV"
     export PYTHONPATH="$PWD/server:$VIRTUAL_ENV:$HOME/Sites/libraries/server-scripts"
     export DJANGO_SETTINGS_MODULE="settings"
     export SITE_NAME=${PWD##*/};
@@ -83,6 +84,16 @@ reset_migrations() {
     rm -rf apps/$1/migrations;
     mkdir -p apps/$1/migrations;
     touch apps/$1/migrations/__init__.py;
+}
+
+reset_all_migrations() {
+    for dir in apps/*
+    do
+        test -d "$dir" || continue
+        rm -rf $dir/migrations;
+        mkdir -p $dir/migrations;
+        touch $dir/migrations/__init__.py;
+    done
 }
 
 resetdb() {

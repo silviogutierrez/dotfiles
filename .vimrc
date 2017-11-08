@@ -56,8 +56,14 @@ let g:syntastic_check_on_open = 0
 let g:syntastic_check_on_wq = 0
 let g:syntastic_javascript_checkers=['jscs']
 
-let g:syntastic_python_checkers=['mypy', 'python', 'flake8', 'pylint']
-let g:syntastic_python_mypy_args = "--ignore-missing-imports --strict --follow-imports silent"
+let g:syntastic_python_checkers=[]
+" let g:syntastic_python_checkers=['python', 'flake8', 'pylint']
+let g:syntastic_python_checkers=['pylint', 'mypy', 'python', 'flake8', 'pycodestyle']
+" let g:syntastic_python_checkers=['pylint']
+" let g:syntastic_python_checkers=['flake8']
+let g:syntastic_aggregate_errors = 1
+" let g:syntastic_python_checkers=[]
+let g:syntastic_python_mypy_args = ""
 
 let g:syntastic_html_checkers=['']
 
@@ -147,6 +153,8 @@ map <leader>] :tabnext<CR>
 map <leader>- :tabfirst<CR>
 map <leader>= :tablast<CR>
 
+map <leader>z :SyntasticToggleMode<CR>
+
 " Toggle paste mode wiht \p
 set pastetoggle=<leader>p
 
@@ -213,3 +221,23 @@ function! Meow()
 endfunction
 
 map <leader>` :call Meow()<CR>
+
+" function! Bark(errors) abort " {{{2
+"     let out = []
+"     for e in a:errors
+"         " new format
+"         let parts = matchlist(e, '\v^(.{-1,}):(\d+): (error|warning|note):( .+)')
+"         if len(parts) > 3
+"             call add(out, join(parts[1:4], ':'))
+"             continue
+"         endif
+"
+"         " old format
+"         let parts = matchlist(e, '\v^(.{-1,}), line (\d+): (.+)')
+"         if len(parts) > 3
+"             call add(out, join(parts[1:3], ':'))
+"         endif
+"     endfor
+"     return out
+" endfunction " }}}2
+" let g:syntastic_python_mypy_preprocess = 'Bark'
