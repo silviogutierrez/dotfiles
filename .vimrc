@@ -6,27 +6,23 @@ filetype off
 set rtp+=~/.vim/bundle/Vundle.vim
 call vundle#begin()
 
-Plugin 'Shougo/vimproc'
-" Plugin 'neomake/neomake'
 Plugin 'VundleVim/Vundle.vim'
-Plugin 'scrooloose/syntastic'
+Plugin 'w0rp/ale'
 Bundle 'wgibbs/vim-irblack'
-Bundle 'chriskempson/vim-tomorrow-theme'
-Bundle 'tpope/vim-surround'
 Bundle 'wincent/Command-T'
-Bundle 'ZenCoding.vim'
-Bundle 'groenewege/vim-less'
-" Bundle 'klen/python-mode'
 Bundle 'plasticboy/vim-markdown'
 Bundle 'tpope/vim-fugitive'
 Bundle 'pangloss/vim-javascript'
 Bundle 'leafgarland/typescript-vim'
-Bundle 'Quramy/tsuquyomi'
-" Plugin 'Quramy/vim-js-pretty-template'
-" Plugin 'itchyny/lightline.vim'
 
 call vundle#end()            " required
 filetype plugin indent on    " required
+
+let g:ale_sign_column_always = 1
+let g:ale_open_list = 1
+let g:ale_lint_on_text_changed = 0
+let g:ale_lint_on_enter = 0
+let g:ale_lint_on_save = 1
 
 " For when Neomake is enabled.
 " autocmd! BufWritePost * Neomake
@@ -38,62 +34,6 @@ set spellfile=~/Sites/libraries/dotfiles/en.utf-8.add
 
 let g:vim_markdown_folding_disabled=1
 
-let g:syntastic_python_python_exec = 'python3.6'
-let g:pymode_folding = 0
-let g:pymode_lint = 0
-let g:pymode_lint_write = 0
-let g:pymode_lint_checker = ""
-" let g:pymode_lint_ignore = "C0301,R0921,R0201,E501,C901"
-let g:pymode_rope = 0
-
-" set statusline+=%#warningmsg#
-" set statusline+=%{SyntasticStatuslineFlag()}
-" set statusline+=%*
-
-let g:syntastic_always_populate_loc_list = 1
-let g:syntastic_auto_loc_list = 1
-let g:syntastic_check_on_open = 0
-let g:syntastic_check_on_wq = 0
-let g:syntastic_javascript_checkers=['jscs']
-
-let g:syntastic_python_checkers=[]
-" let g:syntastic_python_checkers=['python', 'flake8', 'pylint']
-let g:syntastic_python_checkers=['pylint', 'mypy', 'python', 'flake8', 'pycodestyle']
-" let g:syntastic_python_checkers=['pylint']
-" let g:syntastic_python_checkers=['flake8']
-let g:syntastic_aggregate_errors = 1
-" let g:syntastic_python_checkers=[]
-let g:syntastic_python_mypy_args = ""
-
-let g:syntastic_html_checkers=['']
-
-let g:tsuquyomi_disable_quickfix = 1
-let g:tsuquyomi_completion_detail = 1
-
-autocmd FileType typescript nmap <buffer> <Leader>d : <C-u>echo tsuquyomi#hint()<CR>
-
-let g:syntastic_typescript_checkers = ['tsuquyomi', 'tslint']
-
-" let g:syntastic_typescript_tsc_fname = ''
-" let g:syntastic_typescript_checkers = ['tsc', 'tslint']
-
-" let g:syntastic_python_python_exec = 'python3.5'
-
-function! JscsFix()
-    "Save current cursor position"
-    let l:winview = winsaveview()
-    "Pipe the current buffer (%) through the jscs -x command"
-    % ! jscs -x
-    "Restore cursor position - this is needed as piping the file"
-    "through jscs jumps the cursor to the top"
-    call winrestview(l:winview)
-endfunction
-command JscsFix :call JscsFix()
-
-filetype plugin indent on
-
-
-" set spell spelllang=en_us
 set tabpagemax=1000
 set t_Co=256
 
@@ -130,9 +70,6 @@ map <leader>s :%s/\s\+$//e<CR>:w!<CR>
 
 map <leader>t :CommandT<CR>
 
-" Open a custom Commad-T instace with \T
-map <leader>T :CommandT<Space>~/Sites/
-
 " double percentage sign in command mode is expanded
 " to directory of current file - http://vimcasts.org/e/14
 cnoremap %% <C-R>=expand('%:h').'/'<cr>
@@ -153,16 +90,11 @@ map <leader>] :tabnext<CR>
 map <leader>- :tabfirst<CR>
 map <leader>= :tablast<CR>
 
-map <leader>z :SyntasticToggleMode<CR>
-
 " Toggle paste mode wiht \p
 set pastetoggle=<leader>p
 
 " Toggle line numbers with \n
 nmap <leader>n :set invnumber<CR>
-
-" Run tests
-nmap <leader>r :!node tests/mocha.js --bail --preserve<CR>
 
 " When vimrc is edited, reload it
 autocmd! bufwritepost .vimrc source ~/.vimrc
@@ -241,3 +173,7 @@ map <leader>` :call Meow()<CR>
 "     return out
 " endfunction " }}}2
 " let g:syntastic_python_mypy_preprocess = 'Bark'
+"
+" let g:ale_linters = {
+" \   'python': ['autopep8', 'flake8'],
+" \}
