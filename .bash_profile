@@ -2,7 +2,6 @@
 # See: http://apple.stackexchange.com/questions/24310/emacs-ctrl-x-ctrl-s-command-not-working-in-terminal-app
 stty -ixon -ixoff
 
-export JAVA_HOME="/Library/Internet Plug-Ins/JavaAppletPlugin.plugin/Contents/Home"
 shopt -s expand_aliases
 export PATH=~/Sites/libraries/scripts/scripts:$(brew --prefix coreutils)/libexec/gnubin:/usr/local/bin:/usr/local/sbin:$PATH
 # PS1="\[\033[00m\]\u\[\033[0;33m\]@\[\033[00m\]\h\[\033[0;33m\] \w\[\033[00m\]: "
@@ -56,9 +55,9 @@ function django() {
     source ../../bin/activate;
     # export PYTHONPATH=$PWD:$VIRTUAL_ENV:~/Sites/libraries/server-scripts;
     # Presumably django admin works below.
-    export MYPYPATH="$PWD/server/stubs:$PWD/server:$VIRTUAL_ENV"
-    export PYTHONPATH="$PWD/server:$VIRTUAL_ENV:$HOME/Sites/libraries/server-scripts"
-    export DJANGO_SETTINGS_MODULE="settings"
+    export MYPYPATH="$PWD/server/stubs"
+    export PYTHONPATH="$PWD:$HOME/Sites/libraries/server-scripts"
+    export DJANGO_SETTINGS_MODULE="server.settings"
     export SITE_NAME=${PWD##*/};
 }
 
@@ -121,3 +120,7 @@ setup_environment() {
     ../../bin/pip install -r server/requirements/local.txt;
     npm install;
 }
+
+export NVM_DIR="$HOME/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
