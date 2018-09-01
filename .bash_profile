@@ -134,3 +134,16 @@ export NVM_DIR="$HOME/.nvm"
 if command -v pyenv 1>/dev/null 2>&1; then
   eval "$(pyenv init -)"
 fi
+
+function mysql_create_database {
+  mysql -u root -p'root' -e "CREATE DATABASE \`${SITE_NAME}\`;";
+}
+
+function mysql_drop_database {
+  mysql -u root -p'root' -e "SET foreign_key_checks = 0; DROP DATABASE \`${SITE_NAME}\`; SET foreign_key_checks = 1;";
+}
+
+function mysql_reset_database {
+  mysql_drop_database;
+  mysql_create_database;
+}
