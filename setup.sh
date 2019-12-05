@@ -41,3 +41,16 @@ brew cask install microsoft-office microsoft-teams
 brew cask install visual-studio-code
 
 brew cask install google-cloud-sdk
+
+# For Joy and secret encryption.
+brew install shyiko/kubesec/kubesec
+brew install postgresql@11
+brew services start postgresql@11
+
+# Until we figure out how to do it with nix or npm inside nix.
+# See https://github.com/NixOS/nixpkgs/issues/65387
+# brew install ios-deploy
+# Maybe we can use capacitor instead of cordova?
+
+# Nix formula is currently linux only.
+brew cask install android-studio
