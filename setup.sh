@@ -37,7 +37,7 @@ sudo brew services start dnsmasq
 pip3 install tmuxp
 
 brew cask install spectacle
-brew cask install microsoft-office microsoft-teams
+# brew cask install microsoft-office microsoft-teams
 brew cask install visual-studio-code
 
 brew cask install google-cloud-sdk
