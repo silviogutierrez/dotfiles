@@ -3,11 +3,15 @@ set -e
 set -x
 
 brew cask
-brew install dropbox
+brew cask install dropbox
 brew install vim
 brew install mackup
-mackup restore
 
+# Dropbox needs to be finished for this to run.
+# mackup restore --force
+
+# So we download the vimrc manually.
+curl https://raw.githubusercontent.com/silviogutierrez/dotfiles/master/.vimrc > ~/.vimrc
 mkdir -p ~/.vim/bundle
 git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim
 vim +BundleInstall +qall
@@ -20,9 +24,10 @@ brew cask install google-chrome
 brew install tmux
 git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
 
-brew install mysql@5.6
-brew services start mysql@5.6
-brew link --force mysql@5.6
+# No longer needed.
+# brew install mysql@5.6
+# brew services start mysql@5.6
+# brew link --force mysql@5.6
 
 brew cask install docker
 brew cask install iterm2
@@ -30,7 +35,7 @@ brew cask install iterm2
 brew install dnsmasq
 echo 'address=/.localhost/127.0.0.1' >> $(brew --prefix)/etc/dnsmasq.conf
 sudo mkdir -v /etc/resolver
-sudo bash -c 'echo “nameserver 127.0.0.1" > /etc/resolver/localhost'
+sudo bash -c 'echo "nameserver 127.0.0.1" > /etc/resolver/localhost'
 sudo brew services start dnsmasq
 
 # Python 3 is already installed by brew for other packages.
