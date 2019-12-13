@@ -59,3 +59,4 @@ brew services start postgresql@11
 
 # Nix formula is currently linux only.
 brew cask install android-studio
+brew cask install signal
