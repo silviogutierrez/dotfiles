@@ -1,14 +1,52 @@
 #!/bin/bash
+
+# - [ ] Run system update
+# - [ ] Install Xcode in app store
+# - [ ] Install 1Password in app store
+# - [ ] Open XCode
+# - [ ] Install brew
+# - [ ] Install nix
+# - [ ] Close terminal
+# - [ ] Run bash -x setup.sh
+# - [ ] Open dropbox and finish setup, all local no smart sync.
+# - [ ] Open spectacle and finish setup
+# - [ ] Wait a few minutes and verify `ls ~/Dropbox/Mackup` has dot files
+# - [ ] Run `mackup restore --force`
+# - [ ] Open android studio and finish setup
+# - [ ] Turn off iMessage notification preview
+# - [ ] Turn off iMessage notifications on lock screen. This wakes up the monitor.
+# - [ ] Turn off WhatsApp notification preview
+# - [ ] Turn on tap to click
+# - [ ] Turn off alert volume
+# - [ ] Turn on auto dock
+# - [ ] Turn on SSH
+# - [ ] Switch touch bar (preferences -> keyboard -> touch bar shows: Expanded control strip)
+# - [ ] Sign in to Google in order: GMail, SGA Websites, Joy.
+# - [ ] Remove recents as default in finder, and from sidebar
+# - [ ] Turn on iTunes match
+# - [ ] https://stackoverflow.com/a/45430155 . Edit: maybe not?
+# - [ ] In Settings / Notifications / Do Not Disturb, enable "When the display is sleeping"
+# - [ ] In Settings/ Keyboard / Shortcuts, prevent accidental Safari quit: https://alanhogan.com/tips/reduce-accidental-safari-quits
+# - [ ] Turn off auto sleep
+# - [ ] Hot corners: bottom right, Put Display to Sleep
+# - [ ] Display goes to sleep 20 minutes.
+# - [ ] Switch Finder Preferences, Advanced: search current folder.
+# - [ ] https://nickjanetakis.com/blog/docker-tip-32-automatically-clean-up-after-docker-daily
+# - [ ] Add ~/Sites to Spotlight Privacy exclusion in System Preferences for performance.
+
 set -e
 set -x
 
+# See https://www.quora.com/How-can-I-completely-hide-or-remove-the-Dock-in-Mac-OS-X-Yosemite
+defaults write com.apple.Dock autohide-delay -float 5 && killall Dock
+
 brew cask
+brew cask install google-drive-file-stream framer-x
+# brew cask install cyberduck # SFTP client
 brew cask install dropbox
 brew install vim
 brew install mackup
-
-# Dropbox needs to be finished for this to run.
-# mackup restore --force
+brew install kubectx
 
 # So we download the vimrc manually.
 curl https://raw.githubusercontent.com/silviogutierrez/dotfiles/master/.vimrc > ~/.vimrc
@@ -26,6 +64,9 @@ git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
 
 # No longer needed.
 # brew install mysql@5.6
+# brew install mysql
+# If installing latest mysql, Navicat needs the below to connect.
+# ALTER USER 'root'@'localhost' IDENTIFIED WITH mysql_native_password BY ''
 # brew services start mysql@5.6
 # brew link --force mysql@5.6
 
@@ -60,3 +101,6 @@ brew services start postgresql@11
 # Nix formula is currently linux only.
 brew cask install android-studio
 brew cask install signal
+
+# See https://developer.apple.com/documentation/webkit/testing_with_webdriver_in_safari
+sudo /usr/bin/safaridriver --enable
